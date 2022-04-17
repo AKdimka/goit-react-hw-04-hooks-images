@@ -1,23 +1,44 @@
 import { Component } from "react";
+import { Searchbar, SearchForm, SearchFormButton, SearchFormButtonLabel, SearchFormInput } from "./Searchbar.styled";
 
-export class Serchbar extends { Component }{
+export class Serchbar extends Component {
+	state = {
+		search: ''
+	}
+
+	serchInputChange = e => {
+		const normalizedSearchWord = e.currentTarget.value.toLowerCase();
+		this.setState({ search: normalizedSearchWord })
+	}
+
+	handleSubmit = e => {
+		e.preventDefault()
+
+		if (this.state.search.trim() === '') {
+			return
+		}
+		this.props.searchSubmit(this.state.search);
+		this.setState({ search: '' });
+	}
 
 	render() {
-		return (<header class="searchbar">
-			<form class="form">
-				<button type="submit" class="button">
-					<span class="button-label">Search</span>
-				</button>
+		return (
+			<Searchbar>
+				<SearchForm onSubmit={this.handleSubmit}>
+					<SearchFormButton type="submit">
+						<SearchFormButtonLabel>Search</SearchFormButtonLabel>
+					</SearchFormButton>
 
-				<input
-					class="input"
-					type="text"
-					autocomplete="off"
-					autofocus
-					placeholder="Search images and photos"
-				/>
-			</form>
-		</header>
+					<SearchFormInput
+						value={this.state.search}
+						type="text"
+						autocomplete="off"
+						autoFocus
+						placeholder="Search images and photos"
+						onChange={this.serchInputChange}
+					/>
+				</SearchForm>
+			</Searchbar>
 		)
 	}
 }

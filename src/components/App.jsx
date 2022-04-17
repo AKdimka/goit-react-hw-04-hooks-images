@@ -1,24 +1,28 @@
-//import { Serchbar } from "./Serchbar/Serchbar";
-//import { ImageGallary } from "./ImageGallary/ImageGallary";
-//import { ImageGallaryItem } from "./ImageGallaryItem/ImageGallaryItem";
-//import { Button } from "./Modal/Modal";
-//import { Loader } from "./Loader/Loader";
+import { Component } from "react";
+import { MainContainer } from "./App.styled";
+import { Serchbar } from "./Searchbar/Searchbar";
+import { ImageGallary } from "./ImageGallery/ImageGallery";
 //import { Modal } from "./Modal/Modal";
 
-export const App = () => {
-	return (
-		<div
-			style={{
-				height: '100vh',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				fontSize: 40,
-				textTransform: 'uppercase',
-				color: '#010101',
-			}}
-		>
-			React homework template
-		</div>
-	);
+
+export class App extends Component {
+	state = {
+		search: '',
+	};
+
+	handleFormSubmit = search => {
+		this.setState({ search });
+	};
+
+	render() {
+		return (
+			<MainContainer>
+				<Serchbar searchSubmit={this.handleFormSubmit} />
+				<ImageGallary
+					value={this.state.search}
+				/>
+
+			</MainContainer >
+		);
+	}
 };
