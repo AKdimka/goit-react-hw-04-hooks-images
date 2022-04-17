@@ -1,9 +1,14 @@
 import { Component } from "react";
 import { Searchbar, SearchForm, SearchFormButton, SearchFormButtonLabel, SearchFormInput } from "./Searchbar.styled";
+import PropTypes from "prop-types";
 
 export class Serchbar extends Component {
+	static propTypes = {
+		searchSubmit: PropTypes.func.isRequired,
+	}
+
 	state = {
-		search: ''
+		search: '',
 	}
 
 	serchInputChange = e => {
