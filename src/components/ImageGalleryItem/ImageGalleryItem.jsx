@@ -18,12 +18,12 @@ export class ImageGalleryItem extends Component {
 	toggleModal = () => {
 		this.setState(({ modalVisible }) => ({
 			modalVisible: !modalVisible
-		})
-		)
+		}))
 	}
 
 	render() {
 		const { miniImg, alt, bigImg } = this.props;
+		const { modalVisible } = this.state;
 		const { toggleModal } = this;
 		return (
 			<>
@@ -32,13 +32,12 @@ export class ImageGalleryItem extends Component {
 						src={miniImg}
 						alt={alt}
 						onClick={toggleModal} />
-					{this.state.modalVisible &&
+					{modalVisible &&
 						(<Modal
 							img={bigImg}
 							alt={alt}
 							onClose={toggleModal} />)}
 				</ImageGallaryItem>
-
 			</>)
 	}
 }

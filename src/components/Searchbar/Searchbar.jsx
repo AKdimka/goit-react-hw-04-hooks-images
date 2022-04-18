@@ -18,7 +18,6 @@ export class Serchbar extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
-
 		if (this.state.search.trim() === '') {
 			return
 		}
