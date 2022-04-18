@@ -31,10 +31,12 @@ export class App extends Component {
 			const page = String(this.state.page);
 
 
-			fetch(`https://pixabay.com/api/?q=${newSearch}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
+			setTimeout(() => {
+				fetch(`https://pixabay.com/api/?q=${newSearch}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
 				.then(r => r.json())
 				.then(images => this.setState({ images: [...this.state.images, ...images.hits] }))
 				.finally(() => this.setState({ status: 'resolve' }))
+			}, 1000)
 		}
 	}
 
