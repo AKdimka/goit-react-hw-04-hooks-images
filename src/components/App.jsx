@@ -22,7 +22,7 @@ export class App extends Component {
 		const newPage = this.state.page;
 		const oldPage = prS.page;
 
-		if (newSearch !== oldSearch || newSearch !== oldSearch) {
+		if (newSearch !== oldSearch) {
 			this.setState({ images: [], status: 'pending' })
 		}
 
@@ -30,7 +30,7 @@ export class App extends Component {
 			const key = '25269285-81eb312f3fd9664086502c303';
 			const perPage = String(this.state.imgPerPage);
 			const page = String(this.state.page);
-
+			this.setState({ status: 'pending' })
 			fetch(`https://pixabay.com/api/?q=${newSearch}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
 				.then(r => r.json())
 				.then(images => this.setState({ images: [...this.state.images, ...images.hits] }))
