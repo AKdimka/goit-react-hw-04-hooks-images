@@ -1,43 +1,26 @@
-import { Component } from "react";
 import { Modal } from "../Modal/Modal";
 import { ImageGallaryItem, ImageGalleryItemImage } from "./ImageGallaryItem.styled";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 
+export const ImageGalleryItem = ({ miniImg, alt, bigImg, modalVisible, toggleModal }) => {
+	/* 	static propTypes = {
+			miniImg: PropTypes.string.isRequired,
+			bigImg: PropTypes.string.isRequired,
+			alt: PropTypes.string.isRequired,
+		} */
 
-export class ImageGalleryItem extends Component {
-	static propTypes = {
-		miniImg: PropTypes.string.isRequired,
-		bigImg: PropTypes.string.isRequired,
-		alt: PropTypes.string.isRequired,
-	}
-
-	state = {
-		modalVisible: false,
-	}
-
-	toggleModal = () => {
-		this.setState(({ modalVisible }) => ({
-			modalVisible: !modalVisible
-		}))
-	}
-
-	render() {
-		const { miniImg, alt, bigImg } = this.props;
-		const { modalVisible } = this.state;
-		const { toggleModal } = this;
-		return (
-			<>
-				<ImageGallaryItem>
-					<ImageGalleryItemImage
-						src={miniImg}
+	return (
+		<>
+			<ImageGallaryItem>
+				<ImageGalleryItemImage
+					src={miniImg}
+					alt={alt}
+					onClick={toggleModal} />
+				{modalVisible &&
+					(<Modal
+						img={bigImg}
 						alt={alt}
-						onClick={toggleModal} />
-					{modalVisible &&
-						(<Modal
-							img={bigImg}
-							alt={alt}
-							onClose={toggleModal} />)}
-				</ImageGallaryItem>
-			</>)
-	}
+						onClose={toggleModal} />)}
+			</ImageGallaryItem>
+		</>)
 }

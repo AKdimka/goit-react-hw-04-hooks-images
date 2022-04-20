@@ -13,6 +13,7 @@ export class App extends Component {
 		imgPerPage: 12,
 		status: 'idle',
 		images: [],
+		modalVisible: false,
 	};
 
 	componentDidUpdate(prP, prS) {
@@ -21,7 +22,7 @@ export class App extends Component {
 		const newPage = this.state.page;
 		const oldPage = prS.page;
 
-		if (newSearch !== oldSearch) {
+		if (newSearch !== oldSearch || newSearch !== oldSearch) {
 			this.setState({ images: [], status: 'pending' })
 		}
 
@@ -30,13 +31,10 @@ export class App extends Component {
 			const perPage = String(this.state.imgPerPage);
 			const page = String(this.state.page);
 
-
-			setTimeout(() => {
-				fetch(`https://pixabay.com/api/?q=${newSearch}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
+			fetch(`https://pixabay.com/api/?q=${newSearch}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
 				.then(r => r.json())
 				.then(images => this.setState({ images: [...this.state.images, ...images.hits] }))
 				.finally(() => this.setState({ status: 'resolve' }))
-			}, 1000)
 		}
 	}
 
@@ -48,9 +46,13 @@ export class App extends Component {
 		this.setState((state) => ({ page: state.page + 1 }));
 		Scroll.animateScroll.scrollToBottom({ duration: 1000 });
 	}
-
+	toggleModal = () => {
+		this.setState(({ modalVisible }) => ({
+			modalVisible: !modalVisible
+		}))
+	}
 	render() {
-		const { status, images } = this.state;
+		const { status, images, modalVisible } = this.state;
 
 		if (status === 'idle') {
 			return (
@@ -65,6 +67,11 @@ export class App extends Component {
 			return (
 				<MainContainer>
 					<Serchbar searchSubmit={this.handleFormSubmit} />
+					<ImageGallary
+						modalVisible={modalVisible}
+						toggleModal={this.toggleModal}
+						imgs={this.state.images}
+					/>
 					<Loader />
 				</MainContainer>
 			)
@@ -77,6 +84,7 @@ export class App extends Component {
 					<ImageGallary
 						imgs={this.state.images}
 					/>
+					{status === 'pending' && <Loader />}
 					{images.length === 0 ?
 						<h1> Картинок по вашему запросу не найдено ...</h1> :
 						< ShowMoreBtn type="button" onClick={this.showMoreClick} />
