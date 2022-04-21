@@ -82,9 +82,9 @@ export class App extends Component {
 				<MainContainer>
 					<Serchbar searchSubmit={this.handleFormSubmit} />
 					<ImageGallary
-						imgs={this.state.images}
-					/>
-					{status === 'pending' && <Loader />}
+						modalVisible={modalVisible}
+						toggleModal={this.toggleModal}
+						imgs={this.state.images} />
 					{images.length === 0 ?
 						<h1> Картинок по вашему запросу не найдено ...</h1> :
 						< ShowMoreBtn type="button" onClick={this.showMoreClick} />
