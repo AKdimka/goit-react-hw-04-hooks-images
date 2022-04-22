@@ -4,6 +4,7 @@ import { Serchbar } from "./Searchbar/Searchbar";
 import { ImageGallary } from "./ImageGallery/ImageGallery";
 import { Loader } from './Loader/Loader';
 import { ShowMoreBtn } from "./Button/Button";
+import { Modal } from "./Modal/Modal";
 import * as Scroll from 'react-scroll';
 
 export class App extends Component {
@@ -14,6 +15,8 @@ export class App extends Component {
 		status: 'idle',
 		images: [],
 		modalVisible: false,
+		modalImg: '',
+		modalAlt: '',
 	};
 
 	componentDidUpdate(prP, prS) {
@@ -23,7 +26,7 @@ export class App extends Component {
 		const oldPage = prS.page;
 
 		if (newSearch !== oldSearch) {
-			this.setState({ images: [], status: 'pending' })
+			this.setState({ images: [], page: 1 })
 		}
 
 		if (newSearch !== oldSearch || newPage !== oldPage) {
@@ -46,9 +49,11 @@ export class App extends Component {
 		this.setState((state) => ({ page: state.page + 1 }));
 		Scroll.animateScroll.scrollToBottom({ duration: 1000 });
 	}
-	toggleModal = () => {
-		this.setState(({ modalVisible }) => ({
-			modalVisible: !modalVisible
+	toggleModal = (modalImg, modalAlt) => {
+		this.setState(state => ({
+			modalVisible: !state.modalVisible,
+			modalImg: modalImg,
+			modalAlt: modalAlt,
 		}))
 	}
 	render() {
@@ -84,7 +89,15 @@ export class App extends Component {
 					<ImageGallary
 						modalVisible={modalVisible}
 						toggleModal={this.toggleModal}
-						imgs={this.state.images} />
+						imgs={this.state.images}
+					/>
+
+					{modalVisible &&
+						(<Modal
+							img={this.state.modalImg}
+							alt={this.state.modalAlt}
+							onClose={this.toggleModal} />)}
+
 					{images.length === 0 ?
 						<h1> Картинок по вашему запросу не найдено ...</h1> :
 						< ShowMoreBtn type="button" onClick={this.showMoreClick} />
