@@ -10,7 +10,6 @@ import * as Scroll from 'react-scroll';
 export default function App() {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(1);
-	const [imgPerPage, setImgPerPage] = useState(12);
 	const [status, setStatus] = useState('idle');
 	const [images, setImages] = useState([]);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -28,11 +27,10 @@ export default function App() {
 			return
 		};
 		const key = '25269285-81eb312f3fd9664086502c303';
-		const perPage = String(imgPerPage);
 		const pageNum = String(page);
 
 		setStatus('pending');
-		fetch(`https://pixabay.com/api/?q=${search}&page=${pageNum}&key=${key}&image_type=photo&orientation=horizontal&per_page=${perPage}`)
+		fetch(`https://pixabay.com/api/?q=${search}&page=${pageNum}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
 			.then(r => r.json())
 			.then(imgs => setImages(state => [...state, ...imgs.hits]))
 			.finally(() => setStatus('resolve'))
