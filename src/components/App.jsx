@@ -26,7 +26,7 @@ export class App extends Component {
 		const oldPage = prS.page;
 
 		if (newSearch !== oldSearch) {
-			this.setState({ images: [], page: 1 })
+			this.setState({ images: [] })
 		}
 
 		if (newSearch !== oldSearch || newPage !== oldPage) {
@@ -42,7 +42,7 @@ export class App extends Component {
 	}
 
 	handleFormSubmit = search => {
-		this.setState({ search });
+		this.setState({ search: search, page: 1 });
 	};
 
 	showMoreClick = () => {
