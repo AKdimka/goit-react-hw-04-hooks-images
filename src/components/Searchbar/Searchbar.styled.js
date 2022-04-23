@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Searchbar = styled.header`
+export const SearchbarSt = styled.header`
 width: 100vw;
 	top: 0;
 	left: 0;

@@ -1,12 +1,12 @@
 import { Button } from "./Button.styled";
 import PropTypes from "prop-types";
 
-export function ShowMoreBtn({ onClick }) {
+export function ShowMoreBtn({ setPage }) {
 	return (
-		<Button onClick={onClick}>Показать ещё</Button>
+		<Button onClick={() => setPage(state => state + 1)}>Показать ещё</Button>
 	)
 }
 
 ShowMoreBtn.propTypes = {
-	onClick: PropTypes.func.isRequired,
+	setPage: PropTypes.func.isRequired,
 }

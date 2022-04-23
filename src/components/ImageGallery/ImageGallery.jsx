@@ -2,7 +2,7 @@ import { Gallery } from "./ImageGallary.styled";
 import { ImageGalleryItem } from "../ImageGalleryItem/ImageGalleryItem";
 import PropTypes from "prop-types";
 
-export function ImageGallary({ imgs, modalVisible, toggleModal }) {
+export function ImageGallary({ imgs, openModal }) {
 	return (
 		<>
 			< Gallery >
@@ -12,8 +12,7 @@ export function ImageGallary({ imgs, modalVisible, toggleModal }) {
 						miniImg={webformatURL}
 						bigImg={largeImageURL}
 						alt={tags}
-						modalVisible={modalVisible}
-						toggleModal={toggleModal}
+						openModal={openModal}
 					/>
 				)}
 			</ Gallery>
@@ -22,4 +21,5 @@ export function ImageGallary({ imgs, modalVisible, toggleModal }) {
 
 ImageGallary.propTypes = {
 	imgs: PropTypes.arrayOf(PropTypes.object),
+	openModal: PropTypes.func.isRequired,
 }
