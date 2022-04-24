@@ -5,7 +5,6 @@ import { ImageGallary } from "./ImageGallery/ImageGallery";
 import { Loader } from './Loader/Loader';
 import { ShowMoreBtn } from "./Button/Button";
 import { Modal } from "./Modal/Modal";
-import * as Scroll from 'react-scroll';
 
 export default function App() {
 	const [search, setSearch] = useState('');
@@ -15,25 +14,22 @@ export default function App() {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [modalImg, setModalImg] = useState('');
 	const [modalAlt, setModalAlt] = useState('');
-	const [firstRender, setFirstRender] = useState(true);
 
 	useEffect(() => {
 		setImages([])
 	}, [search])
 
 	useEffect(() => {
-		if (firstRender) {
-			setFirstRender(false)
-			return
-		};
 		const key = '25269285-81eb312f3fd9664086502c303';
 		const pageNum = String(page);
 
-		setStatus('pending');
-		fetch(`https://pixabay.com/api/?q=${search}&page=${pageNum}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
-			.then(r => r.json())
-			.then(imgs => setImages(state => [...state, ...imgs.hits]))
-			.finally(() => setStatus('resolve'))
+		if (search !== '') {
+			setStatus('pending');
+			fetch(`https://pixabay.com/api/?q=${search}&page=${pageNum}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+				.then(r => r.json())
+				.then(imgs => setImages(state => [...state, ...imgs.hits]))
+				.finally(() => setStatus('resolve'))
+		}
 	}, [search, page])
 
 	const openModal = (bigImg, alt) => {
