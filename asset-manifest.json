@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/AKdimka/goit-react-hw-04-hooks-images/static/css/main.7acaea2f.css",
+    "main.js": "/AKdimka/goit-react-hw-04-hooks-images/static/js/main.15bcf722.js",
+    "index.html": "/AKdimka/goit-react-hw-04-hooks-images/index.html",
+    "main.7acaea2f.css.map": "/AKdimka/goit-react-hw-04-hooks-images/static/css/main.7acaea2f.css.map",
+    "main.15bcf722.js.map": "/AKdimka/goit-react-hw-04-hooks-images/static/js/main.15bcf722.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.15bcf722.js"
+  ]
+}
