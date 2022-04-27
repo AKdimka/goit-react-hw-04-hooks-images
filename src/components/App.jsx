@@ -42,7 +42,7 @@ export default function App() {
 		<MainContainer>
 			<Searchbar setPage={setPage} setSearch={setSearch} />
 			{status === 'idle' && <h1>Что будем искать???</h1>}
-			{status === 'resolve' && <ImageGallary imgs={images} openModal={openModal} />}
+			{images.length > 0 && <ImageGallary imgs={images} openModal={openModal} />}
 			{status === 'pending' && <Loader />}
 			{images.length !== 0 && <ShowMoreBtn setPage={setPage} />}
 			{modalVisible && <Modal onClose={setModalVisible} img={modalImg} alt={modalAlt} />}
